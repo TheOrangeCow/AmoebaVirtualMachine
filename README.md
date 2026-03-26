@@ -22,9 +22,9 @@ This is the operation codes also find a pdf version <a href ="/TheAmoebaV2Operat
 | 1000 | JB | Jump back a number of instructions. The number is given by the contents of the addressed location. |
 | 1001 | JFE | If the contents of the Accumulator is zero, jump forward a number of instructions given by the contents of the addressed location. |
 | 1010 | JBE | If the contents of the Accumulator is zero, jump back a number of instructions given by the contents of the addressed location. |
-| 1011 | CLO | Clear the output. |
-| 1100 | DAN | Display the contents of the Accumulator in the output as a number. |
-| 1101 | DAC | Display the contents of the Accumulator in the output as a character. |
+| 1011 | CLR | Clear the output. |
+| 1100 | OUTN | Display the contents of the Accumulator in the output as a number. |
+| 1101 | OUTC | Display the contents of the Accumulator in the output as a character. |
 | 1110 | NOP | No operation. |
 | 1111 | END | End program execution. |
 
