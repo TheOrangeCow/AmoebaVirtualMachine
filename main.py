@@ -1,4 +1,4 @@
-# python -m PyInstaller main.py --onefile --noconsole --add-data "icon.ico;." --icon=icon.ico
+# python -m PyInstaller main.py --onefile --noconsole --add-data "icon.ico;." --icon=icon.ico --name AmoebaVM
 import tkinter as Tk
 from tkinter import filedialog
 from tkinter import messagebox
