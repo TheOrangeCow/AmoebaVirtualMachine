@@ -1,6 +1,10 @@
 # AmoebaVirtualMachine
 This is a VBA program that emulates a simple Von Neumann architecture computer.
-<br>Download the latest release [here](https://github.com/TheOrangeCow/AmoebaVirtualMachineV2/releases/tag/v1)
+
+### Downloads
+- amoeba.exe: run directly (no installation) [Download here]()
+- amoeba-setup.exe: installer (adds to Start Menu) [Download here]()
+
 
 ### How it works?
 It takes 8 bit binary code (00001111) and runs them.
