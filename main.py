@@ -129,14 +129,6 @@ def run(code, i, conter):
     elif operation_code == "1100":
         output += str(acc) # OUTN
     
-    elif operation_code == "1101":
-        alfer = "abcdefghijklmnopqrstuvwxyz "
-        if 0 <= acc < 28:
-            output += alfer[acc] # OUTC
-        else:
-            messagebox.showerror("Error", f"Error: Out of range at instruction {i}")
-            return False, conter
-        return False, conter
     elif operation_code == "1101":  # OUTC
         if 0 <= acc <= 127: 
             if 32 <= acc <= 126:
@@ -157,6 +149,11 @@ def run(code, i, conter):
 
     return True, conter
 
+def destroy():
+    global root 
+    if root and root.winfo_exists():
+        root.destroy()
+
 def clean_code(code_lines):
     return [line.strip() for line in code_lines if line.strip() != ""]
 
@@ -171,9 +168,9 @@ def openfile(code_entry):
             code_entry.delete("1.0", "end")
             code_entry.insert("1.0", con)
 
-def getcode(preload_file = None, pre_code = None):
+def getcode(preload_file = None, pre_code = None):    
     global root
-    root = Tk.Tk()
+    root = Tk.Toplevel()
     root.title("Amoeba Virtual Machine V2")
     root.iconbitmap(resource_path("icon.ico"))
     root.geometry("400x400")
@@ -183,15 +180,9 @@ def getcode(preload_file = None, pre_code = None):
     entry_label = Tk.Label(root, text="Enter your code here:", font=("Arial", 12), bg="white")
     entry_label.pack(pady=10)
 
-    if preload_file:
-        try:
-            with open(preload_file, "r") as f:
-                submit_code(f.read().split("\n"))
-            
-        except Exception as e:
-            messagebox.showerror("Error", f"Failed to open file:\n{e}")
+    
 
-    back_button = Tk.Button(root, text="Back", font=("Arial", 12), bg="white", activebackground = "white", command=lambda: [root.destroy(), main()])
+    back_button = Tk.Button(root, text="Back", font=("Arial", 12), bg="white", activebackground = "white", command=lambda: [destroy(), main()])
     back_button.pack()
     
 
@@ -200,12 +191,22 @@ def getcode(preload_file = None, pre_code = None):
     back_button = Tk.Button(root, text="Open", font=("Arial", 12), bg="white", activebackground = "white", command=lambda: openfile(code_entry))
     back_button.pack()
 
+    
+    submit_button = Tk.Button(root, text="Submit", font=("Arial", 12), bg="lightblue", activebackground = "lightblue" ,command=lambda: submit_code(clean_code(code_entry.get("1.0", "end-1c").replace("\\n", "\n").split("\n"))))
+    submit_button.pack(pady=10)
+
+    if preload_file:
+        try:
+            with open(preload_file, "r") as f:
+                submit_code(f.read().split("\n"))
+            
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to open file:\n{e}")
+        
     if pre_code:
         code_entry.delete("1.0", "end")
         for i in pre_code:
             code_entry.insert("end", i +"\n")
-    submit_button = Tk.Button(root, text="Submit", font=("Arial", 12), bg="lightblue", activebackground = "lightblue" ,command=lambda: submit_code(clean_code(code_entry.get("1.0", "end-1c").replace("\\n", "\n").split("\n"))))
-    submit_button.pack(pady=10)
 
     root.mainloop()
 
@@ -358,10 +359,10 @@ def save(code,root, tryagain):
                 file.write(i + "\n")
 
     if tryagain:
-        root.destroy()
+        destroy()
         getcode(pre_code=code)
     else:
-        root.destroy()
+        destroy()
     
         
     
@@ -371,8 +372,8 @@ def submit_code(code):
     global root
     if code != "":
         if root.winfo_exists():
-            root.destroy()
-        root = Tk.Tk()
+            destroy()
+        root = Tk.Toplevel()
         root.title("Amoeba Virtual Machine V2")
         root.geometry("680x600")
         root.resizable(False, False)
@@ -516,7 +517,7 @@ def submit_code(code):
         
 def main():
     global root
-    root = Tk.Tk()
+    root = Tk.Toplevel()
     root.title("Amoeba Virtual Machine V2")
     root.geometry("400x300")
     root.resizable(False, False)
@@ -533,15 +534,18 @@ def main():
     link_label.grid(row=2, column=0)
     link_label.bind("<Button-1>", lambda e: os.system("start https://github.com/TheOrangeCow/AmoebaVirtualMachineV2"))
 
-    start_button = Tk.Button(root, text="Start", font=("Arial", 12), bg="lightblue", activebackground = "lightblue", command= lambda: [root.destroy(), getcode()])
+    start_button = Tk.Button(root, text="Start", font=("Arial", 12), bg="lightblue", activebackground = "lightblue", command= lambda: [destroy(), getcode()])
     start_button.grid(row=3, column=0)
 
 
     root.mainloop()
 
-global root 
+root = Tk.Tk()
+root.withdraw()
+
 if file_to_open:
-    root = Tk.Tk()
     getcode(preload_file=file_to_open)
 else:
     main()
+
+root.mainloop()

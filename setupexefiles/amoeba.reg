@@ -1,0 +1,10 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\.avm]
+@="Amoeba File"
+
+[HKEY_CLASSES_ROOT\AmoebaVMFile\DefaultIcon]
+@="C:\\Program Files\\amoeba\\AmoebaVM.exe,0"
+
+[HKEY_CLASSES_ROOT\AmoebaVMFile\shell\open\command]
+@="\"C:\\Program Files\\amoeba\\amoeba.exe\" \"%1\""
