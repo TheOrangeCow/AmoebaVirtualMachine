@@ -11,7 +11,7 @@ It takes 8 bit binary code (00001111) and runs them.
 The first 4 bits are the Operation Code and the other 4 bits are a number for a address location or a number
 
 ### Operation Code Set
-This is the operation codes also find a pdf version <a href ="/TheAmoebaV2OperationCodeSet.pdf">Here</a>
+This is the operation codes also find a pdf version <a href ="/docs/TheAmoebaV2OperationCodeSet.pdf">Here</a>
 
 | Opcode | Instruction | Description |
 |------|------|-------------|
